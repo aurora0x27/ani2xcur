@@ -1,0 +1,25 @@
+# --- Local planning / docs not tracked ---
+/task.md
+
+# --- Reference copies of the original implementations ---
+/legacy/
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# --- Build artifacts ---
+/build/
+/dist/
+/_skbuild/
+*.so
+*.pyd
+
+# --- Tooling caches ---
+.cache/
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/

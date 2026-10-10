@@ -1,0 +1,33 @@
+[build-system]
+requires = ["scikit-build-core>=0.10", "pybind11>=2.12"]
+build-backend = "scikit_build_core.build"
+
+[project]
+name = "ani2xcur"
+version = "0.1.0"
+description = "Convert Windows cursor themes (.ani / .cur) into Linux XCursor themes"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["pillow>=10.0"]
+
+[project.scripts]
+ani2xcur = "ani2xcur.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[tool.scikit-build]
+minimum-version = "0.10"
+build-dir = "build/{wheel_tag}"
+wheel.packages = ["src/ani2xcur"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+src = ["src", "tests"]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "W"]
