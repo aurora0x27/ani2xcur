@@ -26,25 +26,37 @@ typedef enum {
     ANICORE_ERR_UNSUPPORTED = 3,
 } anicore_status;
 
-/* A single raster frame of a cursor. */
+/*
+ * A single raster of a cursor, wrapped as a self-contained single-image
+ * ICO/CUR so it can be decoded directly by an image library.
+ */
 typedef struct {
-    uint32_t nominal;    /* nominal (directory) size of this image */
+    uint32_t nominal;    /* nominal size: max(width, height) */
     uint32_t width;
     uint32_t height;
     uint32_t hotspot_x;
     uint32_t hotspot_y;
-    const uint8_t *blob; /* raw image payload, borrowed from the input buffer */
+    const uint8_t *blob; /* owned by the cursor, released by anicore_free() */
     size_t blob_size;
+} anicore_image;
+
+/* One animation step: one or more rasters plus its delay in milliseconds. */
+typedef struct {
+    uint32_t delay_ms;
+    uint32_t image_count;
+    anicore_image *images;
 } anicore_frame;
 
-/* A parsed cursor: a static cursor has exactly one frame, an animated one has many. */
+/*
+ * A parsed cursor. A static cursor has exactly one frame with delay 0; an
+ * animated cursor has one frame per animation step.
+ */
 typedef struct {
     uint32_t width;       /* logical size, from the container header (0 if unknown) */
     uint32_t height;
     uint32_t hotspot_x;
     uint32_t hotspot_y;
     uint32_t frame_count;
-    uint32_t *delays_ms;  /* per-frame delay in milliseconds, length == frame_count */
     anicore_frame *frames;
 } anicore_cursor;
 

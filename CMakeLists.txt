@@ -16,6 +16,9 @@ find_package(pybind11 CONFIG REQUIRED)
 # --- C core: Windows cursor container parsing -------------------------------
 add_library(anicore STATIC
     src/csrc/anicore.c
+    src/csrc/ani.c
+    src/csrc/ico.c
+    src/csrc/util.c
 )
 target_include_directories(anicore PUBLIC src/csrc/include)
 target_compile_options(anicore PRIVATE -Wall -Wextra)
