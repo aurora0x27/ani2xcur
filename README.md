@@ -42,4 +42,7 @@ uv run ani2xcur inspect ./theme/Normal.ani
 uv run pytest
 uv run ruff check
 uv run ruff format
+
+# Generate build/compile_commands.json for clangd / IDE tooling
+./scripts/gen-compile-commands.sh
 ```

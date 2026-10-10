@@ -10,6 +10,9 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
+# Emit compile_commands.json (for clangd and other tooling) in the build dir.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 find_package(Python REQUIRED COMPONENTS Interpreter Development.Module)
 find_package(pybind11 CONFIG REQUIRED)
 
