@@ -32,9 +32,22 @@ uv run ani2xcur --help
 # Convert a theme directory (containing an .inf and .ani / .cur files)
 uv run ani2xcur convert --input ./theme --output ./out
 
-# Inspect a cursor file
-uv run ani2xcur inspect ./theme/Normal.ani
+# Choose the nominal sizes (default: 16,24,32,48,64,96,128)
+uv run ani2xcur convert -i ./theme -o ./out --sizes 24,32,48
+
+# Inspect cursor files or a whole directory (add --json for machine output)
+uv run ani2xcur inspect ./out/MyTheme/cursors/left_ptr
+
+# List the canonical roles and their X11 aliases
+uv run ani2xcur roles
 ```
+
+`convert` writes `<output>/<ThemeName>/` with a `cursors/` directory (real
+XCursor files plus one symlink per X11 alias) and an `index.theme`.
+
+`--input` may also point at a single `.ani` / `.cur` / `.ico` (or image) file
+for a one-off conversion, and `--inf` selects a specific description file when a
+theme directory contains more than one.
 
 ## Development
 

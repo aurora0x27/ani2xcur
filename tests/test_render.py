@@ -39,6 +39,17 @@ def test_load_animated_ani(zutomayo_dir: Path) -> None:
     assert all(frame.delay_ms == 100 for frame in cursor.frames)
 
 
+def test_png_payload_decodes(tmp_path: Path, build_cur, png_bytes) -> None:
+    # Pillow's CUR plugin cannot read PNG entries; decode_image must recover them.
+    path = tmp_path / "art.cur"
+    path.write_bytes(build_cur([(32, (4, 5), png_bytes(32, (0, 0, 255, 255)))]))
+    cursor = load_cursor(path)
+
+    image = cursor.frames[0].images[32]
+    assert image.hotspot == (4, 5)
+    assert image.image.getpixel((0, 0)) == (0, 0, 255, 255)
+
+
 # --- rendering --------------------------------------------------------------
 
 

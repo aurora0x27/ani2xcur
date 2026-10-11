@@ -69,3 +69,14 @@ def test_every_ani_parses(request, fixture_name: str, find_files) -> None:
             for image in frame.images:
                 assert image.width > 0 and image.height > 0
                 assert image.blob, f"{path} produced an empty image blob"
+
+
+def test_seq_reorders_and_rate_sets_delays(build_cur, build_ani, png_bytes) -> None:
+    icons = [
+        build_cur([(16, (0, 0), png_bytes(16, (255, 0, 0, 255)))]),
+        build_cur([(32, (0, 0), png_bytes(32, (0, 255, 0, 255)))]),
+    ]
+    cursor = _anicore.parse(build_ani(icons, seq=[1, 0, 1], rate=[10, 20, 30]))
+
+    assert [next(iter(frame.images)).nominal for frame in cursor.frames] == [32, 16, 32]
+    assert [frame.delay_ms for frame in cursor.frames] == [167, 333, 500]

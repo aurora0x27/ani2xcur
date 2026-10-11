@@ -70,3 +70,20 @@ def test_icon_type_has_no_hotspot() -> None:
 def test_malformed_input_raises(blob: bytes) -> None:
     with pytest.raises(ValueError):
         _anicore.parse(blob)
+
+
+def test_multi_image_cur(build_cur, png_bytes) -> None:
+    blob = build_cur(
+        [
+            (16, (1, 1), png_bytes(16, (255, 0, 0, 255))),
+            (32, (2, 2), png_bytes(32, (0, 255, 0, 255))),
+        ]
+    )
+    cursor = _anicore.parse(blob)
+
+    assert len(cursor.frames) == 1
+    images = cursor.frames[0].images
+    assert [(image.nominal, image.hotspot_x, image.hotspot_y) for image in images] == [
+        (16, 1, 1),
+        (32, 2, 2),
+    ]
