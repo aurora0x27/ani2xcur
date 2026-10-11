@@ -1,7 +1,7 @@
 {
   "roles": [
     {
-      "canonical": "pointer",
+      "canonical": "arrow",
       "description": "Default arrow (Windows: Arrow / Normal Select)",
       "keys": ["pointer", "arrow", "normal", "default", "normal_select", "left_ptr"],
       "x11": ["left_ptr", "default", "arrow", "top_left_arrow"]

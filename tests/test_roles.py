@@ -21,8 +21,8 @@ def test_every_sample_key_maps(request, fixture_name: str) -> None:
 @pytest.mark.parametrize(
     ("key", "canonical"),
     [
-        ("pointer", "pointer"),
-        ("arrow", "pointer"),
+        ("pointer", "arrow"),
+        ("arrow", "arrow"),
         ("working", "work"),
         ("work", "work"),
         ("precision", "cross"),
@@ -74,6 +74,14 @@ def test_x11_names_are_unique_across_roles() -> None:
         for name in role.x11:
             assert name not in seen, f"{name!r} in {role.canonical} and {seen[name]}"
             seen[name] = role.canonical
+
+
+def test_no_alias_shadows_another_canonical_role() -> None:
+    canonical = {role.canonical for role in roles.load_roles()}
+    for role in roles.load_roles():
+        for name in role.x11:
+            if name in canonical:
+                assert name == role.canonical, f"{role.canonical} alias {name!r} shadows a role"
 
 
 def test_sanitize_name() -> None:
