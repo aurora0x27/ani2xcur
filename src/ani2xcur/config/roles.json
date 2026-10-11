@@ -1,0 +1,201 @@
+{
+  "roles": [
+    {
+      "canonical": "pointer",
+      "description": "Default arrow (Windows: Arrow / Normal Select)",
+      "keys": ["pointer", "arrow", "normal", "default", "normal_select", "left_ptr"],
+      "x11": ["left_ptr", "default", "arrow", "top_left_arrow"]
+    },
+    {
+      "canonical": "help",
+      "description": "Help / question arrow (Windows: Help)",
+      "keys": ["help", "help_select", "whats_this"],
+      "x11": [
+        "help",
+        "question_arrow",
+        "left_ptr_help",
+        "whats_this",
+        "5c6cd98b3f3ebcb1f9c7f1c204630408",
+        "d9ce0ab605698f320427677b458ad60b"
+      ]
+    },
+    {
+      "canonical": "work",
+      "description": "Working in background (Windows: AppStarting)",
+      "keys": ["work", "working", "appstarting", "app_starting", "working_in_background"],
+      "x11": [
+        "left_ptr_watch",
+        "progress",
+        "half-busy",
+        "00000000000000020006000e7e9ffc3f",
+        "08e8e1c95fe2fc01f976f1e063a24ccd",
+        "3ecb610c1bf2410f44200f48c40d3599"
+      ]
+    },
+    {
+      "canonical": "busy",
+      "description": "Busy (Windows: Wait)",
+      "keys": ["busy", "wait", "watch"],
+      "x11": ["wait", "watch"]
+    },
+    {
+      "canonical": "cross",
+      "description": "Crosshair (Windows: Crosshair / Precision Select)",
+      "keys": ["cross", "crosshair", "precision", "precision_select"],
+      "x11": ["crosshair", "cross", "cross_reverse", "diamond_cross", "tcross"]
+    },
+    {
+      "canonical": "text",
+      "description": "Text / I-beam (Windows: IBeam / Text Select)",
+      "keys": ["text", "text_select", "ibeam"],
+      "x11": ["xterm", "text", "ibeam", "vertical-text"]
+    },
+    {
+      "canonical": "handwriting",
+      "description": "Handwriting / pen (Windows: NWPen)",
+      "keys": ["handwrt", "hand", "handwriting", "nwpen", "pen", "draw"],
+      "x11": ["pencil", "draft", "color-picker"]
+    },
+    {
+      "canonical": "unavailable",
+      "description": "Unavailable (Windows: No)",
+      "keys": ["unavailiable", "unavailable", "no", "forbidden", "unavailable_select"],
+      "x11": [
+        "crossed_circle",
+        "not-allowed",
+        "forbidden",
+        "circle",
+        "03b6e0fcb3499374a867c041f52298f0",
+        "no-drop",
+        "dnd_no_drop"
+      ]
+    },
+    {
+      "canonical": "vert",
+      "description": "Vertical resize (Windows: SizeNS)",
+      "keys": ["vert", "vertical", "vertical_resize", "ns", "sizens", "size_ns"],
+      "x11": [
+        "sb_v_double_arrow",
+        "ns-resize",
+        "row-resize",
+        "size_ver",
+        "size-ver",
+        "v_double_arrow",
+        "split_v",
+        "double_arrow",
+        "00008160000006810000408080010102",
+        "2870a09082c103050810ffdffffe0204",
+        "top_side",
+        "bottom_side",
+        "n-resize",
+        "s-resize"
+      ]
+    },
+    {
+      "canonical": "horz",
+      "description": "Horizontal resize (Windows: SizeWE)",
+      "keys": ["horz", "horizontal", "horizontal_resize", "ew", "sizewe", "size_we"],
+      "x11": [
+        "sb_h_double_arrow",
+        "ew-resize",
+        "col-resize",
+        "size_hor",
+        "size-hor",
+        "h_double_arrow",
+        "split_h",
+        "028006030e0e7ebffc7f7070c0600140",
+        "14fef782d02440884392942c1120523",
+        "left_side",
+        "right_side",
+        "e-resize",
+        "w-resize"
+      ]
+    },
+    {
+      "canonical": "dgn1",
+      "description": "Diagonal resize NW-SE (Windows: SizeNWSE)",
+      "keys": ["dgn1", "diagonal1", "diagonal_resize1", "nwse", "sizenwse", "size_nwse"],
+      "x11": [
+        "bd_double_arrow",
+        "nwse-resize",
+        "size_fdiag",
+        "c7088f0f3e6c8088236ef8e1e3e70000",
+        "top_left_corner",
+        "bottom_right_corner",
+        "nw-resize",
+        "se-resize"
+      ]
+    },
+    {
+      "canonical": "dgn2",
+      "description": "Diagonal resize NE-SW (Windows: SizeNESW)",
+      "keys": ["dgn2", "diagonal2", "diagonal_resize2", "nesw", "sizenesw", "size_nesw"],
+      "x11": [
+        "fd_double_arrow",
+        "nesw-resize",
+        "size_bdiag",
+        "fcf1c3c7cd4491d801f1e1c78f100000",
+        "top_right_corner",
+        "bottom_left_corner",
+        "ne-resize",
+        "sw-resize"
+      ]
+    },
+    {
+      "canonical": "move",
+      "description": "Move / drag (Windows: SizeAll)",
+      "keys": ["move", "size_all", "fleur", "all_scroll"],
+      "x11": [
+        "fleur",
+        "move",
+        "all-scroll",
+        "size_all",
+        "4498f0e0c1937ffe01fd06f973665830",
+        "9081237383d90e509aa00f00170e968f",
+        "grabbing",
+        "closedhand",
+        "dnd-move",
+        "dnd-none",
+        "fcf21c00b30f7e3f83fe0dfd12e71cff",
+        "hand1",
+        "grab",
+        "openhand"
+      ]
+    },
+    {
+      "canonical": "alternate",
+      "description": "Alternate select / up arrow (Windows: UpArrow)",
+      "keys": ["alternate", "up_arrow", "uparrow"],
+      "x11": ["sb_up_arrow", "up-arrow", "center_ptr"]
+    },
+    {
+      "canonical": "link",
+      "description": "Link / pointing hand (Windows: Hand)",
+      "keys": ["link", "pointing_hand"],
+      "x11": [
+        "hand2",
+        "pointer",
+        "pointing_hand",
+        "alias",
+        "dnd-link",
+        "9d800788f1b08800ae810202380a0822",
+        "e29285e634086352946a0e7090d73106",
+        "3085a0e285430894940527032f8b26df",
+        "640fb0e74195791501fd1ed57b41487f",
+        "a2a266d0498c3104214a47bd64ab0fc8"
+      ]
+    },
+    {
+      "canonical": "pin",
+      "description": "Location pin (Windows: Pin / Location Select)",
+      "keys": ["pin", "location", "location_select"],
+      "x11": ["pin", "location"]
+    },
+    {
+      "canonical": "person",
+      "description": "Person (Windows: Person)",
+      "keys": ["person", "person_select"],
+      "x11": ["person", "person_select"]
+    }
+  ]
+}

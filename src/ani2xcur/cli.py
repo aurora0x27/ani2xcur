@@ -88,15 +88,15 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def _cmd_convert(args: argparse.Namespace) -> int:
-    raise SystemExit("error: 'convert' is not implemented yet (Phase 1-5)")
+    raise SystemExit("error: 'convert' is not implemented yet (Phase 5)")
 
 
 def _cmd_inspect(args: argparse.Namespace) -> int:
-    raise SystemExit("error: 'inspect' is not implemented yet (Phase 1-5)")
+    raise SystemExit("error: 'inspect' is not implemented yet (Phase 5)")
 
 
 def _cmd_roles(args: argparse.Namespace) -> int:
-    raise SystemExit("error: 'roles' is not implemented yet (Phase 2)")
+    raise SystemExit("error: 'roles' is not implemented yet (Phase 5)")
 
 
 def main(argv: list[str] | None = None) -> int:
