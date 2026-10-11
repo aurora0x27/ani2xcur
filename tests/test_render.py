@@ -6,6 +6,7 @@ from pathlib import Path
 
 from PIL import Image
 
+from ani2xcur.formats.loader import load_source
 from ani2xcur.formats.win import load_cursor
 from ani2xcur.model import Cursor, CursorFrame, CursorImage
 from ani2xcur.render import DEFAULT_SIZES, premultiply, resize_cursor
@@ -125,3 +126,13 @@ def test_opaque_and_transparent_survive_resize() -> None:
 
     assert rendered.frames[0].images[8].image.getpixel((4, 4)) == (255, 0, 0, 255)
     assert rendered.frames[1].images[8].image.getpixel((4, 4)) == (0, 0, 0, 0)
+
+
+def test_load_plain_image(tmp_path: Path, png_bytes) -> None:
+    path = tmp_path / "art.png"
+    path.write_bytes(png_bytes(24, (9, 8, 7, 255)))
+
+    cursor = load_source(path)
+    assert cursor.nominal_sizes == [24]
+    assert not cursor.is_animated
+    assert cursor.frames[0].images[24].hotspot == (0, 0)

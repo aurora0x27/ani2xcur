@@ -7,14 +7,18 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v5
       - name: Build and install
-        run: uv sync
+        run: uv sync --python ${{ matrix.python }}
       - name: Lint
         run: |
           uv run ruff check
           uv run ruff format --check
       - name: Test
-        run: uv run pytest
+        run: uv run pytest --cov=ani2xcur --cov-report=term-missing
