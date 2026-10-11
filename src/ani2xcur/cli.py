@@ -12,8 +12,7 @@ import argparse
 import sys
 
 from . import __version__
-
-DEFAULT_SIZES = (16, 24, 32, 48, 64, 96, 128)
+from .render import DEFAULT_SIZES
 
 
 def _parse_sizes(raw: str) -> list[int]:
