@@ -63,6 +63,8 @@ def test_zutomayo_end_to_end(tmp_path: Path, zutomayo_dir: Path) -> None:
     images = xcursor.read_file(cursors / "arrow")
     assert len(_frames(images, 32)) == 8
     assert all(image.delay_ms == 100 for image in images)
+    # Palettized source: the AND mask must survive as real transparency.
+    assert 0 in images[0].pixels[3::4]
 
     # Static: Person.cur -> person (single frame, no delay).
     person = xcursor.read_file(cursors / "person")
@@ -79,6 +81,7 @@ def test_miku_end_to_end(tmp_path: Path, miku_dir: Path) -> None:
     images = xcursor.read_file(cursors / "arrow")
     assert len(_frames(images, 32)) == 12
     assert all(image.delay_ms == 117 for image in images)
+    assert 0 in images[0].pixels[3::4]
 
     # Work.ani -> work (23 frames) and a hotspot scaled from the 160px source.
     work = _frames(xcursor.read_file(cursors / "work"), 32)

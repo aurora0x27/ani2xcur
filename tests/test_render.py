@@ -51,6 +51,19 @@ def test_png_payload_decodes(tmp_path: Path, build_cur, png_bytes) -> None:
     assert image.image.getpixel((0, 0)) == (0, 0, 255, 255)
 
 
+def test_palettized_dib_applies_and_mask(zutomayo_dir: Path) -> None:
+    # Zutomayo frames are 8bpp DIBs whose transparency lives in the AND mask.
+    cursor = load_cursor(zutomayo_dir / "Normal.ani")
+    image = cursor.frames[0].images[32].image
+
+    assert image.getchannel("A").getextrema() == (0, 255)
+
+
+def test_static_cur_has_transparent_corner(zutomayo_dir: Path) -> None:
+    cursor = load_cursor(zutomayo_dir / "Person.cur")
+    assert cursor.frames[0].images[42].image.getpixel((0, 0)) == (0, 0, 0, 0)
+
+
 # --- rendering --------------------------------------------------------------
 
 

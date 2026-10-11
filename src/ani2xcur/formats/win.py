@@ -18,15 +18,50 @@ from ..model import Cursor, CursorFrame, CursorImage
 PNG_SIGNATURE = b"\x89PNG\r\n\x1a\n"
 
 
+def _as_icon(blob: bytes) -> bytes:
+    """Re-view a single-image ICO/CUR blob as an ICO.
+
+    Pillow's CUR plugin only applies the 1-bit AND mask for ``1``/``L`` modes,
+    so palettized (``P``) cursors -- common in the wild, e.g. Zutomayo -- come
+    back fully opaque (a black background). Pillow's ICO plugin applies the mask
+    for every bit depth, so we rewrite the container type and directory fields
+    (planes / bit depth taken from the DIB header) before decoding. The hotspot
+    is reported separately by the C core, so nothing is lost.
+    """
+    if len(blob) < 22 or blob[2:4] not in (b"\x01\x00", b"\x02\x00"):
+        return blob  # not one of our single-image containers
+
+    payload_offset = int.from_bytes(blob[18:22], "little")
+    if payload_offset + 16 > len(blob):
+        return blob
+    payload = blob[payload_offset:]
+
+    if payload[:8] == PNG_SIGNATURE:
+        planes, bit_count = 1, 32
+    else:
+        if int.from_bytes(payload[0:4], "little") < 40:  # not a BITMAPINFOHEADER
+            return blob
+        planes = int.from_bytes(payload[12:14], "little") or 1
+        bit_count = int.from_bytes(payload[14:16], "little")
+        if bit_count == 0:
+            return blob
+
+    data = bytearray(blob)
+    data[2:4] = b"\x01\x00"  # ICO
+    data[10:12] = planes.to_bytes(2, "little")
+    data[12:14] = bit_count.to_bytes(2, "little")
+    return bytes(data)
+
+
 def decode_image(blob: bytes) -> Image.Image:
     """Decode a single-image ICO/CUR blob into straight RGBA pixels.
 
-    Pillow's CUR plugin only understands DIB payloads, so PNG entries (allowed
-    by the ICO/CUR spec and seen in the wild) are decoded straight from the
-    embedded PNG stream.
+    DIB payloads are decoded through the ICO path so the AND mask is applied
+    (see :func:`_as_icon`); PNG payloads are a fallback for anything Pillow's
+    icon plugin cannot read.
     """
     try:
-        with Image.open(io.BytesIO(blob)) as image:
+        with Image.open(io.BytesIO(_as_icon(blob))) as image:
             return image.convert("RGBA")
     except OSError:
         offset = blob.find(PNG_SIGNATURE)
